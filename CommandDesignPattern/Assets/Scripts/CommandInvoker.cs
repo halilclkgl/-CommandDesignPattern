@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class CommandInvoker 
 {
-    private Stack<ICommand> undoStack;
+    private Stack<ICommand> commandStack;
 
     public CommandInvoker()
     {
-        undoStack = new Stack<ICommand>();
+        commandStack = new Stack<ICommand>();
     }
 
     public void ExecuteCommand(ICommand command)
     {
         command.Execute();
-        undoStack.Push(command);
+        commandStack.Push(command);
     }
 
     public void UndoLastCommand()
     {
-        if (undoStack.Count > 0)
+        if (commandStack.Count > 0)
         {
-            ICommand lastCommand = undoStack.Pop();
+            ICommand lastCommand = commandStack.Pop();
             lastCommand.Undo();
         }
     }
